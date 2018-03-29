@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tournaments {% endblock %}
+
+{% block body %}
+    <h1>Tournaments management</h1>
+
+    <div class="container">
+
+        <a href="{{ path('tournament') }}" class="btn btn-primary">Create tournament</a>
+
+        <table class="table">
+            <thead>
+            <th scope="col">Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Winner</th>
+            </thead>
+            <tbody>
+            {% for tournament in tournaments %}
+                <tr>
+                    <td><a href="{{ path('tournament_detail', {'id': tournament.id}) }}">{{ tournament.name }}</a></td>
+                    <td>{{ tournament.type }}</td>
+                    <td>{{ tournament.date|date('d/m/Y') }}</td>
+                    {% if tournament.date|date('Y-m-d') > 'now'|date('Y-m-d') %}
+                        <td>Coming</td>
+                    {% elseif tournament.date|date('Y-m-d') == 'now'|date('Y-m-d') %}
+                        <td>In progress</td>
+                    {% else %}
+                        <td>Finished</td>
+                    {% endif %}
+                    {% if tournament.winner %}
+                        <td>{{ tournament.winner.name }}</td>
+                    {% else %}
+                        <td>No winner yet</td>
+                    {% endif %}
+                    <td><a href="{{ path('tournament_update', {'id': tournament.id}) }}" class="btn btn-primary">Update</a></td>
+                    <td><a href="{{ path('tournament_delete', {'id': tournament.id}) }}" class="btn btn-primary">Delete</a></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <th>No tournaments</th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

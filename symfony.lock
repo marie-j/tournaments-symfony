@@ -1,0 +1,26 @@
+{
+    "nelmio/cors-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.5",
+            "ref": "7b6cbc842f8cd3d550815247d12294f6f304a8c4"
+        }
+    },
+    "nikic/php-parser": {
+        "version": "v4.0.0"
+    },
+    "symfony/form": {
+        "version": "v3.4.6"
+    },
+    "symfony/intl": {
+        "version": "v3.4.6"
+    },
+    "symfony/options-resolver": {
+        "version": "v3.4.6"
+    },
+    "symfony/polyfill-intl-icu": {
+        "version": "v1.7.0"
+    }
+}

@@ -1,0 +1,8 @@
+{% extends  'base.html.twig' %}
+{% block title %} Create match {% endblock %}
+
+{% block body %}
+    <h1>Create match in tournament {{ tournament.name }}</h1>
+
+    {% include 'form.html.twig' %}
+{% endblock %}

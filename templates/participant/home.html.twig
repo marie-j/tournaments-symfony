@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Players {% endblock %}
+
+{% block body %}
+
+    <h1>Participants</h1>
+    <div class="container">
+
+        <a href="{{ path('participants_create') }}" class="btn btn-primary">Create participant</a>
+
+        <table class="table">
+            <thead>
+            <th>Name</th>
+            <th>Number of members</th>
+            </thead>
+            <tbody>
+            {% for participant in participants %}
+                <tr>
+                    <td>{{ participant.name }}</td>
+                    <td>{{ participant.membersCount }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <th>No players</th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

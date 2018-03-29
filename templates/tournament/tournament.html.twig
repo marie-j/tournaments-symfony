@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Tournament Detail {% endblock %}
+
+{% block body %}
+    <h1>{{ tournament.name }}</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Participant's List</h2>
+                <ul class="list-group">
+                    {% for participant in tournament.participants %}
+                        <li class="list-group-item">{{ participant.name }}</li>
+                    {% else %}
+                        <li class="list-group-item">No participant yet</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col">
+                <h2>Match</h2>
+
+                <a href="{{ path('match_create', {'id': tournament.id}) }}" class="btn btn-primary">Add match</a>
+                <table class="table">
+                    <thead>
+                    <th>Number</th>
+                    <th>Participant 1</th>
+                    <th></th>
+                    <th></th>
+                    <th>Participant 2</th>
+                    <th>Winner</th>
+                    </thead>
+                    <tbody>
+                    {% for match in tournament.matches %}
+                        <tr>
+                            <td>{{ match.number }}</td>
+                            <td>{{ match.participant1.name }}</td>
+                            <td>{{ match.score1 }}</td>
+                            <td>{{ match.score2 }}</td>
+                            <td>{{ match.participant2.name }}</td>
+                            {% if match.score1 > match.score2 %}
+                                <td>{{ match.participant1.name }}</td>
+                            {% elseif match.score2 > match.score1 %}
+                                <td>{{ match.participant2.name }}</td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+                            <td><a href="{{ path('match_update', {'id': tournament.id, 'match_id': match.id}) }}"
+                                   class="btn btn-primary"> Update</a></td>
+                            <td><a href="{{ path('match_delete', {'id': tournament.id, 'match_id': match.id}) }}"
+                                   class="btn btn-primary">Delete</a></td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <th>No matches yet</th>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
